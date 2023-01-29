@@ -1,0 +1,28 @@
+struct record
+{
+    int id;
+    int type;
+    // bunch of other data
+}
+The problem involves storing a number of these in a data structure that would allow for efficient runtime queries like
+
+GetAllForId(int)
+GetAllOfType(int)
+GetAllOfTypeAndId(int,int)
+There can be multiple records of 'type' for a given 'id' There can be multiple records of 'type' for different 'id'
+
+I also want to be able to easily modify the values in the results of any
+
+GetAllOfTypeAndId(int,int)
+And ofcourse make insertions and deletions with a (preferably) low cost. Although insertions are infrequent so I can eat a bit of cost here.
+
+For reference, I have tried the following solutions :
+
+multimap<type,record>
+Then just iterate on all records to find the one of the relevant type. Feels really cumbersome especially when doing GetAllOfTypeAndId queries, is good for GetAllOfId Queries
+
+map<id,map<type,record>>
+Allows for good GetAllOfTypeAndId queries but fails at providing decent access to GetAllofType
+
+Unfortunately because of the nature of this project, I may not be able to use a relational database system, even if its in memory.
+
